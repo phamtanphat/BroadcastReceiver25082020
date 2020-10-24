@@ -1,6 +1,7 @@
 package com.example.broadcastreceiver25082020;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -21,15 +22,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         myBroadCastReceiver = new MyBroadCastReceiver();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        intentFilter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
-        registerReceiver(myBroadCastReceiver , intentFilter);
+        intentFilter.addAction("android.com.khoapham.Device1");
+        LocalBroadcastManager.getInstance(this).registerReceiver(myBroadCastReceiver , intentFilter);
         super.onStart();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterReceiver(myBroadCastReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(myBroadCastReceiver);
     }
 }
